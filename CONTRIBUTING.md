@@ -12,8 +12,11 @@ already cost a day are explained.
 ## The gate
 
 A change is not finished until `./build-and-test.sh` passes. Every repository
-has one; it is the same command CI runs, so a green run locally means what a
-green tick means there. `./build-and-test.sh fix` formats in place first.
+has one, and it is the script its CI runs. The modes differ, and the repository's
+own guide is what lists them: in nine of the ten the bare command is exactly what
+CI checks, and `fix` formats in place first. The umbrella is the exception — CI
+runs `cross`, the cross-repository half, while the bare command adds every
+sibling's gate on top of it.
 
 ## The review
 
@@ -24,8 +27,9 @@ Five steps, in order, none skipped:
    noted.
 3. The docs-reviewer agent reviews the prose, last: it runs every command a
    document gives and resolves every snippet against the API.
-4. The author reviews the code and runs it — in the simulator, or on a board.
-   That step is theirs; a window and hardware are not an agent's to sign off.
+4. The author reviews the code and runs it — in the simulator, on a board, or
+   through the C++ host, whichever the change reaches. That step is theirs; a
+   running screen is not an agent's to sign off.
 5. They say commit.
 
 A test that cannot fail is worse than no test. Before adding one, break the
